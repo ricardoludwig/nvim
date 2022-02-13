@@ -1,8 +1,6 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
-let g:python3_host_prog = '/usr/bin/python3'
-
 " source ~/.vimrc
 
 set number					" show line numbers
@@ -29,8 +27,18 @@ set ttyfast                 " Speed up scrolling in Vim
 set colorcolumn=80
 highlight ColorColumn ctermbg=DarkGrey
 set encoding=UTF-8
+set autowrite
 
 nnoremap <leader>s :w<CR>
+nnoremap <leader>q :wqa<CR>
+" replace ctrl + x and ctrl + o to ctrl + space
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
+
+let g:python3_host_prog = '/usr/bin/python3'
+let g:rehash256 = 1
+let g:molokai_original = 1
+colorscheme molokai
 
 call plug#begin()
 
@@ -44,8 +52,10 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/yim-gitgutter'
+Plug 'AndrewRadev/splitjoin.vim'
 " Não está ajustando para a tag auto complete com problema
 Plug 'fatih/vim-go', { 'tag': 'v1.25' }
+Plug 'fatih/molokai'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -60,9 +70,20 @@ call plug#end()
 " Vim-Go Integration
 "
 
-" let g:go_list_type = "quickfix"		" force vim-go only uses quickfix list
-" let g:go_fmt_command = "goimports"	" automatically format and also rewrite import declarations
-" let g:go_highlight_types = 1	    " improve syntax highlighting, it impacts vim performance
+let g:go_list_type = "quickfix"		" force vim-go only uses quickfix list
+let g:go_fmt_command = "goimports"	" automatically format and also rewrite import declarations
+let g:go_test_timeout = '30s' " GoTest times out after 30s
+
+" improve syntax highlighting, it impacts vim performance
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+
+
 " let g:go_def_mode='gopls'
 " let g:go_info_mode='gopls'
 
@@ -79,11 +100,15 @@ endfunction
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>tf  <Plug>(go-test)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 
-au filetype go inoremap <buffer> . .<C-x><C-o>
+" replace ctrl + x and ctrl + o to dot in Go files 
+" au filetype go inoremap <buffer> . .<C-x><C-o>
 
-"
 " FZF Vim Integration 
 " https://github.com/junegunn/fzf/blob/master/README-VIM.md
 "
