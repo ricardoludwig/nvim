@@ -19,3 +19,10 @@ python3 -m pip install pynvim
 
 # Install setuptools
 sudo pip3 install setuptools
+
+# Fix dlv install 
+# After run GoUpdateBinaries dvl get this error:
+# Error installing github.com/go-delve/cmd/dlv@master: go get: installing
+# executables with 'go get'in module mode is deprecated
+# Use 'go install pkg@version'instead.
+go install github.com/go-delve/delve/cmd/dlv@latest

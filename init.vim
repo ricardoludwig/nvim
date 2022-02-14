@@ -40,6 +40,7 @@ let g:rehash256 = 1
 " let g:molokai_original = 1
 " colorscheme molokai
 
+" Place where is plugins ~/.local/share/nvim/plugged
 call plug#begin()
 
 " The default plugin directory will be as follows:
