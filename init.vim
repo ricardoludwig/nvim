@@ -37,8 +37,8 @@ inoremap <C-@> <C-Space>
 
 let g:python3_host_prog = '/usr/bin/python3'
 let g:rehash256 = 1
-let g:molokai_original = 1
-colorscheme molokai
+" let g:molokai_original = 1
+" colorscheme molokai
 
 call plug#begin()
 
