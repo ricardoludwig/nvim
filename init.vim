@@ -30,7 +30,8 @@ set encoding=UTF-8
 set autowrite
 
 nnoremap <leader>s :w<CR>
-nnoremap <leader>q :wqa<CR>
+nnoremap <leader>sq :wqa<CR>
+nnoremap <leader>q :qa!<CR>
 " replace ctrl + x and ctrl + o to ctrl + space
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
