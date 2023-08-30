@@ -23,7 +23,8 @@ set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 filetype plugin on
 set ttyfast                 " Speed up scrolling in Vim
-" set spell                 " enable spell check (may need to download language package)
+set spell                 " enable spell check (may need to download language package)
+set spelllang=en,pt_br 
 set colorcolumn=80
 highlight ColorColumn ctermbg=DarkGrey
 set encoding=UTF-8
@@ -35,6 +36,10 @@ nnoremap <leader>q :qa!<CR>
 " replace ctrl + x and ctrl + o to ctrl + space
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
+" pt_br spell check
+" nnoremap <leader>scp :setlocal spell spelllang=pt_br<CR>
+"en-us spell check
+" nnoremap <leader>sce :setlocal spell spelllang=en_us<CR>
 
 let g:python3_host_prog = '/usr/bin/python3'
 let g:rehash256 = 1
