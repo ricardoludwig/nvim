@@ -31,3 +31,12 @@ autocmd({"BufWritePre"}, {
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
+-- Enable spell checking
+vim.cmd('set spell')
+
+-- Create an autocmd to set the language to French for specific filetypes
+vim.cmd([[
+  autocmd BufNewFile,BufRead *.md setlocal spelllang=en,pt_br
+]])
+
