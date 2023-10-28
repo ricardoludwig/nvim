@@ -9,10 +9,17 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
+
 vim.opt.rtp:prepend(lazypath)
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
+vim.cmd('set spell')
+
+vim.cmd([[
+    autocmd BufNewFile,BufRead *.md setlocal spelllang=en,pt_br
+]])
 
 require("rludwig.set")
 require("rludwig.remap")
