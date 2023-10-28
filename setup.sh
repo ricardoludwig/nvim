@@ -5,9 +5,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 # Install delta for git -diff
 sudo dpkg -i git-delta_0.11.3_amd64.deb
 
-# Install Plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 # Check if python3 is install
 which python3
 

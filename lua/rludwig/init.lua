@@ -1,42 +1,64 @@
-require("rludwig.set")
-require("rludwig.remap")
-
-local augroup = vim.api.nvim_create_augroup
-local ThePrimeagenGroup = augroup('ThePrimeagen', {})
-
-local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup('HighlightYank', {})
-
-function R(name)
-    require("plenary.reload").reload_module(name)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
-
-autocmd('TextYankPost', {
-    group = yank_group,
-    pattern = '*',
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = 'IncSearch',
-            timeout = 40,
-        })
-    end,
-})
-
-autocmd({"BufWritePre"}, {
-    group = ThePrimeagenGroup,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})
-
+vim.opt.rtp:prepend(lazypath)
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
--- Enable spell checking
-vim.cmd('set spell')
+require("rludwig.set")
+require("rludwig.remap")
 
--- Create an autocmd to set the language to French for specific filetypes
-vim.cmd([[
-  autocmd BufNewFile,BufRead *.md setlocal spelllang=en,pt_br
-]])
+require("lazy").setup({
+    'rose-pine/neovim', name = 'rose-pine',
+    'nvim-treesitter/nvim-treesitter-context',
+    'theprimeagen/harpoon',
+    'mbbill/undotree',
+    'tpope/vim-fugitive',
+    'folke/zen-mode.nvim',
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'VonHeikemen/lsp-zero.nvim', branch = 'v3.x',
+    'neovim/nvim-lspconfig',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/nvim-cmp',
+    'L3MON4D3/LuaSnip',
+    {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
+    {
+        'nvim-telescope/telescope.nvim', tag = '0.1.4',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    { 
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            icons = false,
+            fold_open = "v", -- icon used for open folds
+            fold_closed = ">", -- icon used for closed folds
+            indent_lines = false, -- add an indent guide below the fold icons
+            signs = {
+                -- -- icons / text used for a diagnostic
+                error = "error",
+                warning = "warn",
+                hint = "hint",
+                information = "info"
+            },
+            use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+        }
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    }
+})
 
