@@ -25,6 +25,7 @@ require("rludwig.set")
 require("rludwig.remap")
 
 require("lazy").setup({
+    'github/copilot.vim',
     'rose-pine/neovim', name = 'rose-pine',
     'nvim-treesitter/nvim-treesitter-context',
     'theprimeagen/harpoon',
