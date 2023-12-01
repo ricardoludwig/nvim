@@ -38,9 +38,10 @@ require("lazy").setup({
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/nvim-cmp',
     'L3MON4D3/LuaSnip',
+    'fatih/vim-go',
+    {'scalameta/nvim-metals', dependencies = { 'nvim-lua/plenary.nvim' } },
     {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-    {
-        'nvim-telescope/telescope.nvim', tag = '0.1.4',
+    { 'nvim-telescope/telescope.nvim', tag = '0.1.4',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     { 
