@@ -15,6 +15,13 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
+vim.g.copilot_filetypes = {
+  ['*'] = true
+ --   ['python'] = true,
+}
+
+ 
+
 vim.cmd('set spell')
 vim.cmd([[
     autocmd BufNewFile,BufRead *.md setlocal spelllang=en,pt_br
